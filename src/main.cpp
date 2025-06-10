@@ -32,7 +32,7 @@ void loop() {
 
     unsigned long elapsed = millis() - startTime;
 
-    if (elasped >=countdownTime) {
+    if (elapsed >=countdownTime) {
 
         display::clearDisplay();
         display::println("Fertig"); 
@@ -53,9 +53,9 @@ void loop() {
     // Update display::display
     display::clearDisplay();
     if (seconds < 10) {
-    display::println("%d:0%d", minutes, seconds);
+    display::printf("%d:0%d", minutes, seconds);
   } else {
-    display::println("%d:%d", minutes, seconds);
+    display::printf("%d:%d", minutes, seconds);
   }
   display::display();
 

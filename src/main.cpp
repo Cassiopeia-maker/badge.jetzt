@@ -23,6 +23,7 @@ void setup() {
     display::println("Countdown");
     display::display();
 
+    delay(1000);
     startTime = millis();
 }
 
@@ -48,10 +49,12 @@ void loop() {
 
     //if (button::down(BTN1)) { led::set_l(255,0,0); msg_l = "BTN1: Left Red"; }
   
-     String timeString = String(minutes) + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+     String timeString = String(minutes) + ":" + String(seconds);
 
     // Update display::display
     display::clearDisplay();
+    display::setTextSize(3);
+    display::setCursor(10, 30);
     
     display::println(timeString);
  

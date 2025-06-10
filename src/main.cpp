@@ -53,8 +53,8 @@ void loop() {
 
     // Update display::display
     display::clearDisplay();
-    display::setTextSize(3);
-    display::setCursor(10, 30);
+    //display::setTextSize(3);
+    //display::setCursor(10, 30);
     
     display::println(timeString);
  

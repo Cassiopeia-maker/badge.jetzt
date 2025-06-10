@@ -5,6 +5,11 @@
 #include "base/button.h"
 #include "base/pins.h"
 
+unsigned long countdownTime = 10 * 60 * 1000;  // 10 Minuten in Millisekunden
+unsigned long startTime;
+
+
+
 
 void setup() {
     Serial.begin(115200);
@@ -15,65 +20,45 @@ void setup() {
     display::init();
 
     display::clearDisplay();
-    display::println("Chaos.JETZT! #9");
-    display::println("26.05.2025 in Leipzig");
-    display::println("");
-    display::println("ESP-C3 - v1.0");
+    display::println("Countdown");
     display::display();
 
-    // Six example options
-    const char* options[] = {
-        "Lion",
-        "Tiger",
-        "Bear",
-        "Elephant",
-        "Giraffe",
-        "Zebra"
-    };
-    int todo = display::makeMenu("Button Test", options, 6);
-    display::clearDisplay();
-
-    // Print Result
-    display::print("Selected Option: ");
-    display::println(String(todo));
-    display::println(options[todo]);
-    display::display();
-    delay(3000);
+    startTime = millis();
 }
 
 
 
 void loop() {
-    String msg_l = "";
-    String msg_r = "";
+
+    unsigned long elapsed = millis() - startTime;
+
+    if (elasped >=countdownTime) {
+
+        display::clearDisplay();
+        display::println("Fertig"); 
+        display::display(); 
+
+        return; 
+    } 
+
+    unsigned long remaining = countdownTime - elapsed;
+    int minutes = (remaining / 1000) / 60;
+    int seconds = (remaining / 1000) % 60;
 
 
-    if (button::down(BTN1)) { led::set_l(255,0,0); msg_l = "BTN1: Left Red"; }
-    else if (button::down(BTN2)) { led::set_l(0,255,0); msg_l = "BTN2: Left Green"; }
-    else if (button::down(BTN3)) { led::set_l(0,0,255); msg_l = "BTN3: Left Blue"; }
-    else
-    {
-        led::set_l(0,0,0);
-        msg_l = "--";
-    }
-    if (button::down(BTN4)) { led::set_r(255,0,0); msg_r = "BTN4: Right Red"; }
-    else if (button::down(BTN5)) { led::set_r(0,255,0); msg_r = "BTN5: Right Green"; }
-    else if (button::down(BTN6)) { led::set_r(0,0,255); msg_r = "BTN6: Right Blue"; }
-    else
-    {
-        led::set_r(0,0,0);
-        msg_r = "--";
-    }
+    //if (button::down(BTN1)) { led::set_l(255,0,0); msg_l = "BTN1: Left Red"; }
+  
 
 
     // Update display::display
     display::clearDisplay();
-    display::println("Button Test");
-    display::println(msg_l);
-    display::println(msg_r);
-    display::println("Press any button");
-    display::println("to change color");
-    display::display();
+    if (seconds < 10) {
+    display::println("%d:0%d", minutes, seconds);
+  } else {
+    display::println("%d:%d", minutes, seconds);
+  }
+  display::display();
 
-    delay(100);
+  delay(500);
+
 }

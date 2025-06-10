@@ -48,15 +48,14 @@ void loop() {
 
     //if (button::down(BTN1)) { led::set_l(255,0,0); msg_l = "BTN1: Left Red"; }
   
-
+     char timeString[6];
+     sprintf(timeString, "%d:%02d", minutes, seconds);
 
     // Update display::display
     display::clearDisplay();
-    if (seconds < 10) {
-    display::printf("%d:0%d", minutes, seconds);
-  } else {
-    display::printf("%d:%d", minutes, seconds);
-  }
+    
+    display::println(timeString);
+ 
   display::display();
 
   delay(500);

@@ -48,8 +48,7 @@ void loop() {
 
     //if (button::down(BTN1)) { led::set_l(255,0,0); msg_l = "BTN1: Left Red"; }
   
-     char timeString[6];
-     sprintf(timeString, "%d:%02d", minutes, seconds);
+     String timeString = String(minutes) + ":" + (seconds < 10 ? "0" : "") + String(seconds);
 
     // Update display::display
     display::clearDisplay();

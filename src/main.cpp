@@ -31,6 +31,8 @@ void setup() {
 
 void loop() {
 
+    
+
     unsigned long elapsed = millis() - startTime;
 
     if (elapsed >=countdownTime) {
@@ -52,14 +54,14 @@ void loop() {
      String timeString = String(minutes) + ":" + String(seconds);
 
     // Update display::display
-    display::clearDisplay();
-    //display::setTextSize(3);
-    //display::setCursor(10, 30);
+    //display::clearDisplay();
     
-    display::println(timeString);
+    //display::println(timeString);
  
-  display::display();
+  //display::display();
 
   delay(500);
+
+
 
 }
